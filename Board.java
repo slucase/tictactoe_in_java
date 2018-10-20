@@ -20,17 +20,20 @@ public class Board extends JFrame
   // Create status label
   JLabel jlblStatus = new JLabel("X's turn");
 
-
   //Create pop up
-
   public static void gameEnded(char winner)
   {
-    JOptionPane.showMessageDialog(null, winner + "'s Victory", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+    String[] gameOver = new String[] {"New Game", "Quit"};
+    int reponse = JOptionPane.showOptionDialog(null, winner + "'s Victory", "Game Over",
+                  JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
+                  null, gameOver, gameOver[0]);
   }
 
   //constructor
   public Board ()
   {
+    //Destroy StartMenu
+    StartMenuJframe.dispose()
     //panel
     JPanel panel = new JPanel(new GridLayout(3, 3, 0, 0));
 
@@ -48,13 +51,11 @@ public class Board extends JFrame
   public boolean isFull()
   {
     for (int i = 0; i < 3; i++)
-      for (int j = 0; j< 3; j++)
+      for (int j = 0; j < 3; j++)
         if (cells[i][j].getToken() == ' ')
           return false;
     return true;    
-
   }
-
 
   // Check game status
   public boolean isWinner(char token)
@@ -92,7 +93,6 @@ public class Board extends JFrame
     }
     return false;
   }
-  
 
   //tictactoe builder and executor
   public class Cell extends JPanel
@@ -102,7 +102,6 @@ public class Board extends JFrame
     //create buttons
     private JButton cellButton;
 
-        
     public Cell()
     {
 
@@ -124,7 +123,7 @@ public class Board extends JFrame
         JOptionPane.showMessageDialog(null, String.format("%s", event.getActionCommand()));
       }
     }
-  
+
     //read token
     public char getToken()
     {
@@ -136,8 +135,6 @@ public class Board extends JFrame
       token = c;
       repaint();
     }
-
-
 
     //Create board
     @Override

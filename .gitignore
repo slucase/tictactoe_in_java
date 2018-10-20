@@ -6,3 +6,6 @@
 *.exe
 *.o
 *.so1
+
+# Demos Folder #
+Demos/
