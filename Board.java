@@ -11,8 +11,11 @@ import javax.swing.JFrame;
 
 public class Board extends JFrame
 {
+
+  
   //Indicate players' turn
   private char whoseTurn = 'X';
+  private boolean gameFinished = false;
 
   //create grid
   private Cell[][] cells = new Cell[3][3];
@@ -32,8 +35,6 @@ public class Board extends JFrame
   //constructor
   public Board ()
   {
-    //Destroy StartMenu
-    StartMenuJframe.dispose()
     //panel
     JPanel panel = new JPanel(new GridLayout(3, 3, 0, 0));
 
@@ -48,6 +49,11 @@ public class Board extends JFrame
     add(jlblStatus, BorderLayout.SOUTH);
   }
 
+  public boolean isRunning()
+  {
+    return !(gameFinished);
+  }
+  
   public boolean isFull()
   {
     for (int i = 0; i < 3; i++)
@@ -100,29 +106,29 @@ public class Board extends JFrame
     private char token = ' ';
   
     //create buttons
-    private JButton cellButton;
+//    private JButton cellButton;
 
     public Cell()
     {
 
       //Initaialize buttons
-      setLayout(new GridBagLayout());
-
-      cellButton = new JButton(" ");
-
-      setBorder(new LineBorder(Color.black, 1));
-      add(cellButton, new GridBagConstraints());
+//      setLayout(new GridBagLayout());
+//
+//      cellButton = new JButton(" ");
+//
+      setBorder(new LineBorder(Color.black, 5));
+//      add(cellButton, new GridBagConstraints());
       
-      HandlerClass playMove = new HandlerClass();
-      cellButton.addActionListener(playMove);
+//      HandlerClass playMove = new HandlerClass();
+//      cellButton.addActionListener(playMove);
       addMouseListener(new MyMouseListener());
     }
 
-    private class HandlerClass implements ActionListener{
-      public void actionPerformed (ActionEvent event){
-        JOptionPane.showMessageDialog(null, String.format("%s", event.getActionCommand()));
-      }
-    }
+//    private class HandlerClass implements ActionListener{
+//      public void actionPerformed (ActionEvent event){
+//        JOptionPane.showMessageDialog(null, String.format("%s", event.getActionCommand()));
+//      }
+//    }
 
     //read token
     public char getToken()
@@ -158,6 +164,8 @@ public class Board extends JFrame
       @Override
       public void mouseClicked(MouseEvent e)
       {
+        if(gameFinished)
+          return;
         if (token == ' ' && whoseTurn != ' ')
           setToken(whoseTurn);
       
@@ -166,11 +174,13 @@ public class Board extends JFrame
           jlblStatus.setText(whoseTurn + "'s Victory!");
           gameEnded(whoseTurn);
           whoseTurn = ' ';
+          gameFinished = true;
         }
         else if (isFull())
         {
           jlblStatus.setText("it's a tie");
           whoseTurn = ' ';
+          gameFinished = true;          
         }
         else
         {

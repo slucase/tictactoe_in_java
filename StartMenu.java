@@ -14,6 +14,7 @@ public class StartMenu extends JFrame /* implements ActionListener*/ {
   private JButton playHumanHuman = new JButton("New PvP Match");
   private JButton quit = new JButton("Quit game");
   private JLabel welcome = new JLabel("Welcome to Tic Tac Toe by Lucas");
+  private boolean gameIsRunning = false;
 
   private int choice = 0;
 
@@ -28,13 +29,21 @@ public class StartMenu extends JFrame /* implements ActionListener*/ {
 
     clickCheck c = new clickCheck();
 
-    playHumanAI.addActionListener(c);
+    playHumanHuman.addActionListener(c);
 
   }
 
   public class clickCheck implements ActionListener {
     public void actionPerformed(ActionEvent c){
 
+      JFrame ticTacToe = new Board();
+      
+      ticTacToe.setTitle("TicTacToe_game");
+      ticTacToe.setSize(300, 300);
+      ticTacToe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      ticTacToe.setLocationRelativeTo(null);
+      ticTacToe.setVisible(true);
+      setVisible(false);
     }
 
   }

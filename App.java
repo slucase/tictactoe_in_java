@@ -10,13 +10,6 @@ public class App
         iMenu.setVisible(true);
         iMenu.setTitle("Tic Tac Toe - Start Menu");
 
-        
 
-        JFrame ticTacToe = new Board();
-        ticTacToe.setTitle("TicTacToe_game");
-        ticTacToe.setSize(300, 300);
-        ticTacToe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ticTacToe.setLocationRelativeTo(null);
-        ticTacToe.setVisible(true);
     }
 }
